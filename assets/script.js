@@ -2,9 +2,30 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
-  var taskToDo = $('.fas');
+  const toDos = localStorage.getItem('todos')
+  const parsedTodos = JSON.parse(toDos)
+  const hourKeys = Object.keys(parsedTodos)
+  console.log({ hourKeys })
+  // ['hour-11', 'hour-10']
+
+   // loop over hour keys
+    // get div with hour id
+      // get text area child
+        // set value in text area
+  for (var i = 0; i < hourKeys.length; i++) {
+    const key = hourKeys[i]
+    const value = parsedTodos[key]
+    const timeBlockEl = $('#' + key)
+
+    timeBlockEl.children('.description').val(value)
+  }
+
+ 
+
   var saveBtn = $('.saveBtn');
-  var toDo =[];
+
+  console.log({ saveBtn })
+
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
@@ -12,14 +33,25 @@ $(function () {
     // time-block containing the button that was clicked? How might the id be
     // useful when saving the description in local storage?
     
-   
+  
    saveBtn.on('click', function(){
-    toDo = {
-      taskToDo: taskToDo.value,
-    };
+    const timeBlockEl = $(this).parent()
+    const id = timeBlockEl.attr('id')
+    const input = timeBlockEl.children('.description')
+    const value = input.val()
 
-    localStorage.setItem("toDo", JSON.stringify(toDo));
-    showToDo();
+    console.log({ input, value })
+
+    const prevTodos = localStorage.getItem('todos')
+
+    const toDos = {
+      ...JSON.parse(prevTodos),
+      [id]: value,
+    }
+
+    console.log({ toDos })
+
+    localStorage.setItem("todos", JSON.stringify(toDos));
    })
     
 
@@ -29,12 +61,34 @@ $(function () {
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
-    function showToDo() {
-      var previousInput = JSON.parse(localStorage.getItem(toDo));
-      if (toDo !== undefined) {
-        document.querySelector(".fas").textContent = previousInput.fas 
+    
+    // loop over all time block elements
+    // get id with the hour
+    // get the hour out of the id
+    // compare that to current time
+    // apply style based on comparison
+    const container = $('#hourOfDay')
+    const timeBlockElements = container.children()
+    console.log({ container, timeBlockElements })
+   
+    $(timeBlockElements).each(function(i, element) {
+      const id = $(element).attr('id')
+      const hour = Number(id.slice(5))
+
+      console.log({ id, hour })
+
+      const currentHour = dayjs().hour()
+
+      if (currentHour < hour) {
+        $(element).addClass( "future")
+      } else if (currentHour === hour){
+        $(element).addClass( "present")
+      } else {
+        $(element).addClass( "past")
       }
-    };
+
+      
+    })
     //
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
