@@ -2,10 +2,54 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+
+  const container = $('#hourOfDay')
+    const timeBlockElements = container.children()
+   
+    $(timeBlockElements).each(function(i, element) {
+      const id = $(element).attr('id')
+      const hour = Number(id.slice(5))
+
+
+      const currentHour = dayjs().hour()
+
+      if (currentHour < hour) {
+        $(element).addClass( "future")
+      } else if (currentHour === hour){
+        $(element).addClass( "present")
+      } else {
+        $(element).addClass( "past")
+      }
+
+      
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
   const toDos = localStorage.getItem('todos')
-  const parsedTodos = JSON.parse(toDos)
+  const parsedTodos = JSON.parse(toDos) 
   const hourKeys = Object.keys(parsedTodos)
-  console.log({ hourKeys })
+
+
+  if (toDos === null){
+
+  } else {
+    const parsedTodos = JSON.parse(toDos) 
+    if ( hourKeys === null){
+
+    } else {
+    const hourKeys = Object.keys(parsedTodos)
+  }}
   // ['hour-11', 'hour-10']
 
    // loop over hour keys
@@ -24,7 +68,6 @@ $(function () {
 
   var saveBtn = $('.saveBtn');
 
-  console.log({ saveBtn })
 
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
@@ -40,7 +83,6 @@ $(function () {
     const input = timeBlockEl.children('.description')
     const value = input.val()
 
-    console.log({ input, value })
 
     const prevTodos = localStorage.getItem('todos')
 
@@ -49,7 +91,6 @@ $(function () {
       [id]: value,
     }
 
-    console.log({ toDos })
 
     localStorage.setItem("todos", JSON.stringify(toDos));
    })
@@ -62,33 +103,7 @@ $(function () {
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
     
-    // loop over all time block elements
-    // get id with the hour
-    // get the hour out of the id
-    // compare that to current time
-    // apply style based on comparison
-    const container = $('#hourOfDay')
-    const timeBlockElements = container.children()
-    console.log({ container, timeBlockElements })
-   
-    $(timeBlockElements).each(function(i, element) {
-      const id = $(element).attr('id')
-      const hour = Number(id.slice(5))
 
-      console.log({ id, hour })
-
-      const currentHour = dayjs().hour()
-
-      if (currentHour < hour) {
-        $(element).addClass( "future")
-      } else if (currentHour === hour){
-        $(element).addClass( "present")
-      } else {
-        $(element).addClass( "past")
-      }
-
-      
-    })
     //
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
