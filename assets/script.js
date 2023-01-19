@@ -46,23 +46,34 @@ $(function () {
   } else {
     const parsedTodos = JSON.parse(toDos) 
     if ( hourKeys === null){
+      // const hourKeys = ''
+    } else if ( hourKeys !== null){
+    let hourKeys = Object.keys(parsedTodos)
 
-    } else {
-    const hourKeys = Object.keys(parsedTodos)
+    for (var i = 0; i < hourKeys.length; i++) {
+      const key = hourKeys[i]
+      const value = parsedTodos[key]
+      const timeBlockEl = $('#' + key)
+  
+      timeBlockEl.children('.description').val(value)
+    }
+
   }}
+
+  
   // ['hour-11', 'hour-10']
 
    // loop over hour keys
     // get div with hour id
       // get text area child
         // set value in text area
-  for (var i = 0; i < hourKeys.length; i++) {
-    const key = hourKeys[i]
-    const value = parsedTodos[key]
-    const timeBlockEl = $('#' + key)
+  // for (var i = 0; i < hourKeys.length; i++) {
+  //   const key = hourKeys[i]
+  //   const value = parsedTodos[key]
+  //   const timeBlockEl = $('#' + key)
 
-    timeBlockEl.children('.description').val(value)
-  }
+  //   timeBlockEl.children('.description').val(value)
+  // }
 
  
 
