@@ -14,7 +14,7 @@ You can fill in your daily schedule and save your tasks. The calendar will autom
 
 [WorkDay Plannar Webpage](https://amess33.github.io/WorkDay-Scheduler/)
 
-When you open the page you will see your daily plannar with today's date and 9 time slots beggining at 9am and running through the end of your work day at 5pm. 
+When you open the page you will see your daily plannar with today's date and 9 time slots beggining at 9am and running through the end of your work day at 5pm. Each time block will be color cooridinated with the current time of day. If a time block is past, the time block will be gray. If you are in the current hour of the day the timeblock will show red. All future time blocks will be green.
 
 ![Daily Planner blank page](./assets/images/Screenshot%202023-01-18%20at%204.54.53%20PM.png)
 
