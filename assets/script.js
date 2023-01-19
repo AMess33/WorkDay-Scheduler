@@ -36,7 +36,7 @@ $(function () {
 
 
 
-  const toDos = localStorage.getItem('todos')
+  const toDos = localStorage.getItem('todos') || "{}"
   const parsedTodos = JSON.parse(toDos) 
   const hourKeys = Object.keys(parsedTodos)
 
